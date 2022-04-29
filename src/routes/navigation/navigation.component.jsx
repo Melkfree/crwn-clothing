@@ -31,11 +31,6 @@ const Navigation = () => {
                         currentUser ? (<span className="nav-link" onClick={signOutHandler} >SIGN OUT</span>) : (<Link className="nav-link" to='/authentication'>SIGN IN</Link>)
                         
                     }
-
-
-                    {/* <Link className="nav-link" to='/authentication' >
-                        Sign in
-                    </Link> */}
                 </div>
             </div>
             <Outlet/>
