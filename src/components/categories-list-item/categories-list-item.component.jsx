@@ -1,12 +1,12 @@
 import React from "react";
-import './category-item.styles.scss';
+import './categories-list-item.styles.scss';
 
-const CategoryItem = ({ category }) => {
+const CategoriesListItem = ({ category }) => {
     const {imageUrl, id, title} = category;
     return(
-        <div key={id} className='category-container'>
+        <div key={id} className='categories-list-item-container'>
           <div className='background-image' style={{backgroundImage: `url(${imageUrl})`}}></div>
-          <div className='category-body-container'>
+          <div className='body'>
             <h2>{title}</h2>
             <p>Shop Now</p>
           </div>
@@ -15,4 +15,4 @@ const CategoryItem = ({ category }) => {
 }
 
 
-export default CategoryItem;
+export default CategoriesListItem;
