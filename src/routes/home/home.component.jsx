@@ -34,7 +34,6 @@ function Home() {
 
   return (
     <div>
-      
       <CategoriesList categories={categories} />
       <Outlet/>
     </div>
