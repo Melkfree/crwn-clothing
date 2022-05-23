@@ -47,7 +47,7 @@ export const UserProvider = ({ children }) => {
             setCurrentUser(user);
         });
         return unsubsribe  
-    }, [])
+    }, []);
 
     return <UserContext.Provider value={value} >
         {children}
