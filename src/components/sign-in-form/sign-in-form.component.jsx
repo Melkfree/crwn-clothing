@@ -1,11 +1,11 @@
 import { useState } from "react";
-
-import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
+import { useDispatch } from "react-redux/es/exports";
 
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
 import './sign-in-form.styles.scss';
+import { googleSignInStart, emailSignInStart } from "../../store/user/user.action";
 
 const defaultFormFields = {
     email: '',
@@ -14,6 +14,7 @@ const defaultFormFields = {
 
 
 const SignInForm = () => {
+    const dispatch = useDispatch();
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
@@ -21,8 +22,8 @@ const SignInForm = () => {
         setFormFields(defaultFormFields);
     }
 
-    const SignInWithGoogle = async () => {
-        await signInWithGooglePopup();
+    const signInWithGoogle = async () => {
+        dispatch(googleSignInStart());
     }
 
     const handleSubmit = async (event) => {
@@ -30,7 +31,7 @@ const SignInForm = () => {
 
         
         try {
-            const {user} = await signInAuthUserWithEmailAndPassword (email, password);
+            dispatch(emailSignInStart(email, password));
             resetFormFields();
         } catch(error) {
             switch(error.code) {
@@ -55,7 +56,7 @@ const SignInForm = () => {
                 <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password}/>
                 <div className="buttons-container">
                     <Button type="submit">Sign In</Button>
-                    <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGooglePopup} >Google sign in</Button>
+                    <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle} >Google sign in</Button>
                 </div>
             </form>
         </div>
