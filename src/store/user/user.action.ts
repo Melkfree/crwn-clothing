@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+
 import { USER_ACTION_TYPES } from "./user.types";
 
 import { createAction, withMatcher, Action, ActionWithPayload } from "../../utils/reducer/reducer.utils";
@@ -14,7 +16,7 @@ export type SignUpFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_FAILED, E
 export type SignOutStart = Action<USER_ACTION_TYPES.SIGN_OUT_START>;
 export type SignOutSuccess = Action<USER_ACTION_TYPES.SIGN_OUT_SUCCESS>;
 export type SignOutFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_OUT_FAILED, Error>;
-export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: UserData, additionalDetails: AdditionalInformation}>
+export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user: User, additionalDetails: AdditionalInformation}>
 
 
 
@@ -30,7 +32,7 @@ export const googleSignInStart = withMatcher((): GoogleSignInStart =>
 export const emailSignInStart = withMatcher((email: string, password: string): EmailSignInStart => 
     createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, {email, password}));
 
-export const signInSuccess = withMatcher((user: UserData): SignInSuccess => 
+export const signInSuccess = withMatcher((user: UserData & { id: string }): SignInSuccess => 
     createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user));
 
 export const signInFailed = withMatcher((error: Error): SignInFailed => 
@@ -40,7 +42,7 @@ export const signInFailed = withMatcher((error: Error): SignInFailed =>
 export const signUpStart = withMatcher((email: string, password: string, displayName: string): SignUpStart => 
     createAction(USER_ACTION_TYPES.SIGN_UP_START, {email, password, displayName}));
 
-export const signUpSuccess = withMatcher((user: UserData, additionalDetails: AdditionalInformation): SignUpSuccess => 
+export const signUpSuccess = withMatcher((user: User, additionalDetails: AdditionalInformation): SignUpSuccess => 
     createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, {user, additionalDetails}));
 
 export const signUpFailed = withMatcher((error: Error): SignUpFailed => 
