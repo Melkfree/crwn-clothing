@@ -10,6 +10,7 @@ export const BackgroundImage = styled.div`
 
 export const Body = styled.div`
   height: 90px;
+  width: 150px;
   padding: 0 25px;
   display: flex;
   flex-direction: column;
@@ -64,5 +65,10 @@ export const CategoriesListItemContainer = styled.div`
 
   &:last-child {
     margin-left: 7.5px;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 50px;
+    padding: 0;
   }
 `
